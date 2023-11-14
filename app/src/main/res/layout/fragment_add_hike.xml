@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddHike">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Name of the hike"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/hikeNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:hint="Ha Long"
+                android:singleLine="true"
+                android:background="@drawable/edittext_background"/>
+
+            <TextView
+                android:id="@+id/txtLocation"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Location"
+                android:textSize="25sp"/>
+
+            <EditText
+                android:id="@+id/locationEditText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
+                android:hint="Quang Ninh"
+                android:singleLine="true"
+                android:background="@drawable/edittext_background"/>
+
+            <TextView
+                android:id="@+id/txtDohike"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Date of the hike"
+                android:textSize="25sp"/>
+
+            <EditText
+                android:id="@+id/dateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:focusable="false"
+                android:paddingStart="10dp"
+                android:hint="Date of the hike"
+                android:background="@drawable/edittext_background"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtPa"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:text="Parking available"
+                    android:textSize="25sp" />
+
+                <RadioGroup
+                    android:id="@+id/parkingRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/parkingAvailableRadioButton"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/parkingNotAvailableRadioButton"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:text="No" />
+                </RadioGroup>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtLeghth"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Leghth of the hike"
+                android:textSize="25sp"/>
+
+            <EditText
+                android:id="@+id/lengthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:paddingStart="10dp"
+                android:hint="100"
+                android:singleLine="true"
+                android:background="@drawable/edittext_background"
+                android:inputType="number"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/txtLevel"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:text="Difficulty level"
+                    android:textSize="25sp"/>
+
+                <Spinner
+                    android:id="@+id/difficultySpinner"
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/edittext_background"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="25sp"/>
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:gravity="top|start"
+                android:padding="10dp"
+                android:hint="Description about the hike ..."
+                android:background="@drawable/edittext_background"/>
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="ADD" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
