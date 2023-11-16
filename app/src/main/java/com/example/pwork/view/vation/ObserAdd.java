@@ -2,8 +2,10 @@ package com.example.pwork.view.vation;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.pwork.R;
@@ -14,6 +16,7 @@ import java.util.Calendar;
 public class ObserAdd extends AppCompatActivity {
 
     private EditText observationEditText, timeOfObservationEditText, commentsEditText;
+    private ImageButton customButton;
     private Button addObservationButton;
     private HikeDatabase db;
 
@@ -28,6 +31,14 @@ public class ObserAdd extends AppCompatActivity {
         timeOfObservationEditText = findViewById(R.id.timeOfObservationEditText);
         commentsEditText = findViewById(R.id.commentsEditText);
         addObservationButton = findViewById(R.id.addObservationButton);
+
+        customButton = findViewById(R.id.custom_button);
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish(); // Kết thúc EditHike và quay lại DetailsHike
+            }
+        });
 
         timeOfObservationEditText.setOnClickListener(v -> showDatePickerDialog());
 

@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ public class Observations extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Button btnNew;
+    private ImageButton customButton;
     private ObserAdapter adapter;
     private HikeDatabase db;
     private BroadcastReceiver observationAddedReceiver;
@@ -34,6 +38,13 @@ public class Observations extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        customButton = findViewById(R.id.custom_button);
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish(); // Kết thúc EditHike và quay lại DetailsHike
+            }
+        });
         btnNew = findViewById(R.id.btnNew);
         btnNew.setOnClickListener(v -> {
             // Mở một Activity hoặc Fragment để thêm quan sát mới

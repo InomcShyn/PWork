@@ -1,6 +1,7 @@
 package com.example.pwork.view.vation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pwork.R;
 import com.example.pwork.database.HikeDatabase;
 import com.example.pwork.model.Obser;
+import com.example.pwork.view.editview.EditOb;
 
 import java.util.List;
 
@@ -52,6 +54,19 @@ public class ObserAdapter extends RecyclerView.Adapter<ObserAdapter.ViewHolder> 
                 }
             }
         });
+
+        // Xử lý sự kiện khi nút "Edit" được nhấn
+        holder.editItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy vị trí của item trong danh sách
+                int adapterPosition = holder.getAdapterPosition();
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    // Xử lý chỉnh sửa quan sát ở vị trí này và chuyển sang màn hình EditOb
+                    editObservation(adapterPosition);
+                }
+            }
+        });
     }
 
     public void removeObservation(int position) {
@@ -69,6 +84,24 @@ public class ObserAdapter extends RecyclerView.Adapter<ObserAdapter.ViewHolder> 
         observations.remove(position);
         notifyItemRemoved(position);
     }
+
+    // Phương thức để chỉnh sửa quan sát tại vị trí cụ thể
+    public void editObservation(int position) {
+        Obser observation = observations.get(position);
+
+        // Tạo một Intent để chuyển sang màn hình EditOb
+        Intent intent = new Intent(context, EditOb.class);
+
+        // Truyền dữ liệu của quan sát cần chỉnh sửa vào Intent
+        intent.putExtra("observation_id", observation.id); // Truyền ID của quan sát
+        intent.putExtra("observation_observation", observation.observation); // Truyền thông tin quan sát
+        intent.putExtra("observation_time", observation.timeOfObservation); // Truyền thời gian quan sát
+        intent.putExtra("observation_comments", observation.comments); // Truyền bình luận
+
+        // Bắt đầu màn hình EditOb bằng Intent
+        context.startActivity(intent);
+    }
+
     @Override
     public int getItemCount() {
         return observations != null ? observations.size() : 0;
@@ -77,11 +110,13 @@ public class ObserAdapter extends RecyclerView.Adapter<ObserAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewObservation; // TextView for observation
         Button deleteItem; // Button for deleting the item
+        Button editItem; // Button for editing the item
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewObservation = itemView.findViewById(R.id.textViewName);
-            deleteItem = itemView.findViewById(R.id.deleteItem); // Add this line to find the delete button
+            deleteItem = itemView.findViewById(R.id.deleteItem);
+            editItem = itemView.findViewById(R.id.editItem); // Add this line to find the edit button
         }
     }
 }

@@ -34,7 +34,6 @@ public class DetailsHike extends Fragment {
         // Lấy thể hiện của HikeDatabase
         db = HikeDatabase.getDatabase(getActivity());
 
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -44,7 +43,6 @@ public class DetailsHike extends Fragment {
 
         // Load hikes and observe changes
         db.hikeDao().getAllHikeNames("%").observe(getViewLifecycleOwner(), hikes -> adapter.setHikes(hikes));
-
 
         loadHikes();
 
@@ -79,6 +77,4 @@ public class DetailsHike extends Fragment {
             });
         }).start();
     }
-
 }
-

@@ -2,22 +2,29 @@ package com.example.pwork.view.editview;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pwork.R;
 import com.example.pwork.dao.HikeDao;
 import com.example.pwork.database.HikeDatabase;
 import com.example.pwork.model.Hike;
+import com.example.pwork.view.fragment.DetailsHike;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +34,7 @@ import java.util.Locale;
 
 public class EditHike extends AppCompatActivity {
     private EditText hikeNameEditText, locationEditText, dateEditText, lengthEditText, descriptionEditText;
+    private ImageButton customButton;
     private RadioGroup parkingRadioGroup;
     private Spinner difficultySpinner;
     private Button btnUpdate;
@@ -47,6 +55,7 @@ public class EditHike extends AppCompatActivity {
         parkingRadioGroup = findViewById(R.id.parkingRadioGroup);
         difficultySpinner = findViewById(R.id.difficultySpinner);
         btnUpdate = findViewById(R.id.btnUpdate);
+        customButton = findViewById(R.id.custom_button);
 
         // Setup HikeDatabase and HikeDao
         HikeDatabase db = HikeDatabase.getDatabase(this);
@@ -64,6 +73,14 @@ public class EditHike extends AppCompatActivity {
 
         loadHikeData();
 
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish(); // Kết thúc EditHike và quay lại DetailsHike
+            }
+        });
+
+        btnUpdate = findViewById(R.id.btnUpdate);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +132,14 @@ public class EditHike extends AppCompatActivity {
 
             hikeDao.updateHike(hike);
 
-            runOnUiThread(() -> Toast.makeText(EditHike.this, "Hike updated", Toast.LENGTH_SHORT).show());
+            runOnUiThread(() -> {
+                Toast.makeText(EditHike.this, "Hike updated", Toast.LENGTH_SHORT).show();
+                // Sử dụng Handler để đặt một trễ trước khi quay lại Activity chứa DetailsHike
+                new Handler().postDelayed(() -> {
+                    // Quay lại Activity chứa DetailsHike Fragment
+                    finish();
+                }, 2000); // Đặt trễ 2 giây
+            });
         }).start();
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.pwork.R;
@@ -14,6 +15,7 @@ public class EditOb extends AppCompatActivity {
 
     private EditText observationEditText, timeOfObservationEditText, commentsEditText;
     private Button editObservationButton;
+    private ImageButton customButton;
     private HikeDatabase db;
     private Obser observation;
 
@@ -30,7 +32,24 @@ public class EditOb extends AppCompatActivity {
         editObservationButton = findViewById(R.id.addObservationButton);
 
         // Retrieve the observation data passed from the previous activity
-        observation = getIntent().getParcelableExtra("observation");
+        int observationId = getIntent().getIntExtra("observation_id", -1); // Mặc định -1 nếu không tìm thấy
+        String observationText = getIntent().getStringExtra("observation_observation");
+        String timeOfObservationText = getIntent().getStringExtra("observation_time");
+        String commentsText = getIntent().getStringExtra("observation_comments");
+
+        observation = new Obser();
+        observation.id = observationId;
+        observation.observation = observationText;
+        observation.timeOfObservation = timeOfObservationText;
+        observation.comments = commentsText;
+
+        customButton = findViewById(R.id.custom_button);
+        customButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         if (observation != null) {
             // Populate the EditText fields with the existing observation data

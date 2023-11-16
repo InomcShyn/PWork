@@ -9,14 +9,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentTop="true">
-        <TextView
-            android:id="@+id/tvHomeTitle"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Observations"
-            android:gravity="center"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/custom_button"
+                android:layout_width="41dp"
+                android:layout_height="29dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/custom_button" />
+
+            <TextView
+                android:id="@+id/tvHomeTitle"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Observations"
+                android:textSize="35sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <Button
             android:id="@+id/btnNew"
             android:layout_width="match_parent"
