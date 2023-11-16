@@ -15,14 +15,14 @@
         android:text="" />
 
     <Button
-        android:id="@+id/moreItem"
+        android:id="@+id/editItem"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf="@id/textViewName"
+        android:layout_toRightOf="@id/textViewName"
         android:background="@color/red"
-        android:text="More"
+        android:text="Edit"
         android:textColor="@color/white" />
     <Button
         android:id="@+id/deleteItem"

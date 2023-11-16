@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pwork.dao.HikeDao;
 import com.example.pwork.model.Hike;
-import com.example.pwork.view.EditHike;
+import com.example.pwork.view.editview.EditHike;
+import com.example.pwork.view.fragment.AddHike;
+import com.example.pwork.view.fragment.DetailsHike;
+import com.example.pwork.view.vation.Observations;
 
 import java.util.List;
 
@@ -46,6 +49,19 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.HikeViewHolder
         } else {
             // Hiển thị tên và nút xóa trong danh sách chi tiết
             holder.textViewName.setText(hike.name);
+            holder.textViewName.setOnClickListener(v -> {
+                // Mở EditHike và truyền thông tin của chuyến đi (ID hoặc dữ liệu khác) để chỉnh sửa
+                Intent intent = new Intent(v.getContext(), EditHike.class);
+                intent.putExtra("HIKE_ID", hike.id);
+                v.getContext().startActivity(intent);
+            });
+            holder.moreItem.setVisibility(View.VISIBLE);
+            holder.moreItem.setOnClickListener(v -> {
+                // Mở hoạt động mới để hiển thị quan sát (Observations)
+                Intent intent = new Intent(v.getContext(), Observations.class);
+                intent.putExtra("HIKE_ID", hike.id); // Truyền ID của chuyến đi để hiển thị các quan sát tương ứng
+                v.getContext().startActivity(intent);
+            });
             if (holder.deleteButton != null) {
                 holder.deleteButton.setVisibility(View.VISIBLE);
             }
@@ -81,12 +97,13 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.HikeViewHolder
 
     public static class HikeViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName, tvHikeName;
-        Button deleteButton;
+        Button deleteButton, moreItem;
 
         public HikeViewHolder(View itemView, HikeAdapter adapter, boolean isSearch) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textViewName);
             tvHikeName = itemView.findViewById(R.id.tvHikeName);
+            moreItem = itemView.findViewById(R.id.moreItem);
             if (!isSearch) {
                 deleteButton = itemView.findViewById(R.id.deleteItem);
                 if (deleteButton != null) {

@@ -1,4 +1,4 @@
-package com.example.pwork.view;
+package com.example.pwork.view.editview;
 
 
 import android.app.DatePickerDialog;
@@ -60,7 +60,7 @@ public class EditHike extends AppCompatActivity {
         dateEditText.setOnClickListener(v -> showDatePickerDialog());
 
         // Get hike ID from Intent
-        hikeId = getIntent().getLongExtra("hike_id", -1);
+        hikeId = getIntent().getLongExtra("HIKE_ID", -1);
 
         loadHikeData();
 

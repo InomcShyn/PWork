@@ -7,12 +7,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.pwork.dao.HikeDao;
+import com.example.pwork.dao.ObserDao;
 import com.example.pwork.model.Hike;
+import com.example.pwork.model.Obser;
 
-@Database(entities = {Hike.class}, version = 1, exportSchema = false)
+@Database(entities = {Hike.class, Obser.class}, version = 2, exportSchema = false)
 public abstract class HikeDatabase extends RoomDatabase {
 
     public abstract HikeDao hikeDao();
+    public abstract ObserDao observationDao();
 
     private static volatile HikeDatabase INSTANCE;
 

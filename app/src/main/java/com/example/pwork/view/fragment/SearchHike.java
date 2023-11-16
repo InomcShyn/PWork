@@ -1,4 +1,4 @@
-package com.example.pwork.view;
+package com.example.pwork.view.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;

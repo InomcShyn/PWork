@@ -11,9 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PWork"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.EditHike"
+            android:name=".view.vation.ObserAdd"
+            android:exported="false" />
+        <activity
+            android:name=".view.editview.EditOb"
+            android:exported="false" />
+        <activity
+            android:name=".view.vation.Observations"
+            android:exported="false" />
+        <activity
+            android:name=".view.editview.EditHike"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

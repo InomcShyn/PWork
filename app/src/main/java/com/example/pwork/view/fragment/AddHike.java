@@ -1,4 +1,4 @@
-package com.example.pwork.view;
+package com.example.pwork.view.fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;

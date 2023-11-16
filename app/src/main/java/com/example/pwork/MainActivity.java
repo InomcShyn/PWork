@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
-import com.example.pwork.view.AddHike;
-import com.example.pwork.view.DetailsHike;
-import com.example.pwork.view.SearchHike;
+import com.example.pwork.view.fragment.AddHike;
+import com.example.pwork.view.fragment.DetailsHike;
+import com.example.pwork.view.fragment.SearchHike;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
