@@ -108,7 +108,7 @@ public class AddHike extends Fragment {
             hike.difficulty = difficulty;
             hike.description = description;
 
-            // Hiển thị AlertDialog để xác nhận thông tin trước khi thêm vào cơ sở dữ liệu
+            //hiển thị AlertDialog để xác nhận thông tin trước khi thêm vào cơ sở dữ liệu
             showConfirmationDialog(hike);
         }
     }

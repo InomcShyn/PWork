@@ -46,7 +46,6 @@ public class EditHike extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_hike);
 
-        // Initialize views
         hikeNameEditText = findViewById(R.id.hikeNameEditText);
         locationEditText = findViewById(R.id.locationEditText);
         dateEditText = findViewById(R.id.dateEditText);
@@ -57,7 +56,6 @@ public class EditHike extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
         customButton = findViewById(R.id.custom_button);
 
-        // Setup HikeDatabase and HikeDao
         HikeDatabase db = HikeDatabase.getDatabase(this);
         hikeDao = db.hikeDao();
 
@@ -68,7 +66,6 @@ public class EditHike extends AppCompatActivity {
 
         dateEditText.setOnClickListener(v -> showDatePickerDialog());
 
-        // Get hike ID from Intent
         hikeId = getIntent().getLongExtra("HIKE_ID", -1);
 
         loadHikeData();
@@ -76,7 +73,7 @@ public class EditHike extends AppCompatActivity {
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // Kết thúc EditHike và quay lại DetailsHike
+                finish(); //kết thúc EditHike và quay lại DetailsHike
             }
         });
 
@@ -123,22 +120,18 @@ public class EditHike extends AppCompatActivity {
             hike.date = dateEditText.getText().toString();
             hike.length = Integer.parseInt(lengthEditText.getText().toString());
             hike.description = descriptionEditText.getText().toString();
-
-            // Update parking availability
             hike.parkingAvailable = parkingRadioGroup.getCheckedRadioButtonId() == R.id.parkingAvailableRadioButton;
-
-            // Update difficulty level
             hike.difficulty = difficultySpinner.getSelectedItem().toString();
 
             hikeDao.updateHike(hike);
 
             runOnUiThread(() -> {
                 Toast.makeText(EditHike.this, "Hike updated", Toast.LENGTH_SHORT).show();
-                // Sử dụng Handler để đặt một trễ trước khi quay lại Activity chứa DetailsHike
+                //sử dụng Handler để đặt một trễ trước khi quay lại Activity chứa DetailsHike
                 new Handler().postDelayed(() -> {
-                    // Quay lại Activity chứa DetailsHike Fragment
+                    //quay lại Activity chứa DetailsHike Fragment
                     finish();
-                }, 2000); // Đặt trễ 2 giây
+                }, 2000); //đặt trễ 2 giây
             });
         }).start();
     }
@@ -158,10 +151,10 @@ public class EditHike extends AppCompatActivity {
         final Calendar calendar = Calendar.getInstance();
         int year, month, day;
 
-        // Kiểm tra xem EditText có chứa ngày hợp lệ không
+        //kiểm tra xem EditText có chứa ngày hợp lệ không
         String currentText = dateEditText.getText().toString();
         if (!currentText.isEmpty()) {
-            // Parse ngày từ EditText và sử dụng nó làm ngày mặc định trong DatePickerDialog
+            //parse ngày từ EditText và sử dụng nó làm ngày mặc định trong DatePickerDialog
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             try {
                 Date date = format.parse(currentText);

@@ -44,22 +44,22 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.HikeViewHolder
     public void onBindViewHolder(@NonNull HikeViewHolder holder, int position) {
         Hike hike = hikes.get(position);
         if (isSearch) {
-            // Chỉ hiển thị tên trong tìm kiếm
+            //chỉ hiển thị tên trong tìm kiếm
             holder.tvHikeName.setText(hike.name);
         } else {
-            // Hiển thị tên và nút xóa trong danh sách chi tiết
+            //hiển thị tên và nút xóa trong danh sách chi tiết
             holder.textViewName.setText(hike.name);
             holder.textViewName.setOnClickListener(v -> {
-                // Mở EditHike và truyền thông tin của chuyến đi (ID hoặc dữ liệu khác) để chỉnh sửa
+                //mở EditHike và truyền thông tin của chuyến đi (ID) để chỉnh sửa
                 Intent intent = new Intent(v.getContext(), EditHike.class);
                 intent.putExtra("HIKE_ID", hike.id);
                 v.getContext().startActivity(intent);
             });
             holder.moreItem.setVisibility(View.VISIBLE);
             holder.moreItem.setOnClickListener(v -> {
-                // Mở hoạt động mới để hiển thị quan sát (Observations)
+                //mở hoạt động mới để hiển thị quan sát (Observations)
                 Intent intent = new Intent(v.getContext(), Observations.class);
-                intent.putExtra("HIKE_ID", hike.id); // Truyền ID của chuyến đi để hiển thị các quan sát tương ứng
+                intent.putExtra("HIKE_ID", hike.id); //truyền ID của chuyến đi để hiển thị các quan sát tương ứng
                 v.getContext().startActivity(intent);
             });
             if (holder.deleteButton != null) {
@@ -78,11 +78,11 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.HikeViewHolder
         notifyDataSetChanged();
     }
 
-    // Phương thức để xóa hike từ danh sách và cơ sở dữ liệu
+    //xóa hike từ danh sách và cơ sở dữ liệu
     public void deleteHike(int position) {
         Hike hikeToDelete = hikes.get(position);
 
-        // Xóa dữ liệu từ database trên luồng nền
+        //xóa dữ liệu từ database trên luồng nền
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -115,7 +115,7 @@ public class HikeAdapter extends RecyclerView.Adapter<HikeAdapter.HikeViewHolder
                     });
                 }
             } else {
-                deleteButton = null; // No delete button in search layout
+                deleteButton = null;
             }
         }
     }

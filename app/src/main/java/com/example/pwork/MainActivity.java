@@ -22,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo các Fragment
+        //khởi tạo các Fragment
         addHike = new AddHike();
         detailsHike = new DetailsHike();
         searchHike = new SearchHike();
 
-        // Ánh xạ BottomNavigationView và thiết lập sự kiện chuyển đổi Fragment
+        //thiết lập sự kiện chuyển đổi Fragment
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Hiển thị Fragment mặc định là AddHike
+        //Hiển thị Fragment mặc định là AddHike
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, addHike).commit();
         }
     }
 
-    // Phương thức để tải một Fragment mới
+    //tải một Fragment mới
     private void loadFragment(Fragment fragment) {
-        // Kiểm tra xem Fragment đã được thêm vào hay chưa
+        //Kiểm tra xem Fragment đã được thêm vào hay chưa
         if (!fragment.isAdded()) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, fragment)

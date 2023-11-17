@@ -18,7 +18,7 @@ public interface ObserDao {
     @Delete
     void delete(Obser observation);
     @Update
-    void update(Obser observation); // Add this method for updating an observation
+    void update(Obser observation);
 
     @Query("SELECT * FROM observations")
     List<Obser> getAllObservations();

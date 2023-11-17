@@ -31,13 +31,12 @@ public class DetailsHike extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_details_hike, container, false);
 
-        // Lấy thể hiện của HikeDatabase
         db = HikeDatabase.getDatabase(getActivity());
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Khởi tạo HikeAdapter với HikeDao
+        //khởi tạo HikeAdapter với HikeDao
         adapter = new HikeAdapter(getContext(), null, HikeDatabase.getDatabase(getContext()).hikeDao(), false);
         recyclerView.setAdapter(adapter);
 
@@ -62,7 +61,7 @@ public class DetailsHike extends Fragment {
         db.hikeDao().getAllHikeNames("%").observe(getViewLifecycleOwner(), new Observer<List<Hike>>() {
             @Override
             public void onChanged(List<Hike> hikes) {
-                // Cập nhật dữ liệu vào adapter
+                //cập nhật dữ liệu vào adapter
                 adapter.setHikes(hikes);
             }
         });
@@ -72,7 +71,7 @@ public class DetailsHike extends Fragment {
         new Thread(() -> {
             db.hikeDao().deleteAll();
             getActivity().runOnUiThread(() -> {
-                // Cập nhật giao diện người dùng sau khi xóa
+                //cập nhật giao diện người dùng sau khi xóa
                 adapter.setHikes(new ArrayList<>());
             });
         }).start();

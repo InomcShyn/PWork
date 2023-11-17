@@ -40,11 +40,9 @@ public class SearchHike extends Fragment {
         recyclerView = view.findViewById(R.id.resultRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Assume HikeDatabase is correctly instantiated
         db = HikeDatabase.getDatabase(getContext());
         hikeDao = db.hikeDao();
 
-        // Adapter for search results with isSearch set to true
         adapter = new HikeAdapter(getContext(), new ArrayList<>(), HikeDatabase.getDatabase(getContext()).hikeDao(), true);
         recyclerView.setAdapter(adapter);
 
@@ -69,21 +67,20 @@ public class SearchHike extends Fragment {
         db.hikeDao().getAllHikeNames(searchQuery).observe(getViewLifecycleOwner(), new Observer<List<Hike>>() {
             @Override
             public void onChanged(@Nullable final List<Hike> hikes) {
-                adapter.setHikes(hikes); // Cập nhật danh sách hikes trong adapter
+                adapter.setHikes(hikes); //cập nhật danh sách hikes trong adapter
             }
         });
     }
 
     private void performSearch(String searchQuery) {
         if (searchQuery.isEmpty()) {
-            adapter.setHikes(new ArrayList<>()); // Nếu chuỗi tìm kiếm trống, xóa kết quả hiện tại
+            adapter.setHikes(new ArrayList<>()); //nếu chuỗi tìm kiếm trống, xóa kết quả hiện tại
         } else {
-            final String finalSearchQuery = "%" + searchQuery + "%"; // Thêm dấu % để tìm kiếm LIKE trong SQL
+            final String finalSearchQuery = "%" + searchQuery + "%"; //thêm dấu % để tìm kiếm LIKE trong SQL
             new Thread(() -> {
                 List<Hike> result = hikeDao.searchHikesByName(finalSearchQuery);
-                // Vì đang trong Thread mới nên cần chạy UI update trên main thread
                 getActivity().runOnUiThread(() -> {
-                    adapter.setHikes(result); // Cập nhật kết quả tìm kiếm vào adapter
+                    adapter.setHikes(result); //cập nhật kết quả tìm kiếm vào adapter
                 });
             }).start();
         }

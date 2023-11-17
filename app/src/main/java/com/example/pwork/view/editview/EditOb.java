@@ -61,18 +61,15 @@ public class EditOb extends AppCompatActivity {
         editObservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the updated observation details
                 String updatedObservation = observationEditText.getText().toString().trim();
                 String updatedTimeOfObservation = timeOfObservationEditText.getText().toString().trim();
                 String updatedComments = commentsEditText.getText().toString().trim();
 
-                // Validate input
                 if (!validateInput(updatedObservation, updatedTimeOfObservation)) {
                     Toast.makeText(EditOb.this, "Invalid input provided", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Update the observation and save it to the database
                 observation.observation = updatedObservation;
                 observation.timeOfObservation = updatedTimeOfObservation;
                 observation.comments = updatedComments;
@@ -85,7 +82,7 @@ public class EditOb extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(getApplicationContext(), "Observation successfully updated", Toast.LENGTH_SHORT).show();
-                                finish(); // Close the activity after updating the observation
+                                finish();
                             }
                         });
                     }
@@ -95,7 +92,6 @@ public class EditOb extends AppCompatActivity {
     }
 
     private boolean validateInput(String observation, String timeOfObservation) {
-        // You can add your input validation logic here
         return !observation.isEmpty() && !timeOfObservation.isEmpty();
     }
 }

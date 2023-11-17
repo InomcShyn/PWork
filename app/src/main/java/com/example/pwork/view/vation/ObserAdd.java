@@ -36,7 +36,7 @@ public class ObserAdd extends AppCompatActivity {
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // Kết thúc EditHike và quay lại DetailsHike
+                finish();
             }
         });
 
@@ -59,11 +59,10 @@ public class ObserAdd extends AppCompatActivity {
 
             new Thread(() -> {
                 db.observationDao().insert(newObser);
-                // Send a broadcast to notify Observations activity of the new observation
                 sendBroadcast(new Intent("observation_added"));
                 runOnUiThread(() -> {
                     Toast.makeText(getApplicationContext(), "Observation successfully added", Toast.LENGTH_SHORT).show();
-                    finish(); // Close the activity after adding the new observation
+                    finish();
                 });
             }).start();
         });
@@ -86,7 +85,6 @@ public class ObserAdd extends AppCompatActivity {
     }
 
     private boolean validateInput(String observation, String timeOfObservation) {
-        // Check if observation or timeOfObservation is empty
         return !observation.isEmpty() && !timeOfObservation.isEmpty();
     }
 }

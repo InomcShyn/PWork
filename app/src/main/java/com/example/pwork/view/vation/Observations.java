@@ -42,21 +42,19 @@ public class Observations extends AppCompatActivity {
         customButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // Kết thúc EditHike và quay lại DetailsHike
+                finish(); //kết thúc EditHike và quay lại DetailsHike
             }
         });
         btnNew = findViewById(R.id.btnNew);
         btnNew.setOnClickListener(v -> {
-            // Mở một Activity hoặc Fragment để thêm quan sát mới
+            //mở một Activity hoặc Fragment để thêm quan sát mới
             Intent intent = new Intent(Observations.this, ObserAdd.class);
             startActivity(intent);
         });
 
-        // Register the broadcast receiver to listen for observation added events
         observationAddedReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                // Handle the observation added event
                 loadObservations();
             }
         };
@@ -67,10 +65,10 @@ public class Observations extends AppCompatActivity {
 
     private void loadObservations() {
         new Thread(() -> {
-            // Truy vấn cơ sở dữ liệu Room ở đây
+            //truy vấn cơ sở dữ liệu Room ở đây
             List<Obser> observations = db.observationDao().getAllObservations();
 
-            // Cập nhật UI trên luồng giao diện người dùng
+            //cập nhật UI trên luồng giao diện người dùng
             runOnUiThread(() -> {
                 adapter = new ObserAdapter(this, observations, db);
                 recyclerView.setAdapter(adapter);
